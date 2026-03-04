@@ -1,0 +1,12 @@
+*{
+ font-family: "Poppins", sans-serif;
+}
+.hind-siliguri-light {
+  font-family: "Hind Siliguri", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.active{
+ background-color: #0d6efd; 
+ color: white;
+}

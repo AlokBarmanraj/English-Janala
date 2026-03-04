@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Janala</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    <!-- DaisyUI and TailwindCSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font Awesome CDN  -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+     <!-- Google Font Hind Siliguri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google font Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Css Link -->
+     <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <header>
+    <div class="navbar bg-blue-100 shadow-sm px-20">
+    <div class="flex-1">
+    <a class="flex text-xl font-bold items-center cursor-pointer" href="">English <span><img src="assets/logo.png" alt=""></span> <span>জানালা</span></a>
+    </div>
+    <div class="flex">
+    <ul class="menu menu-horizontal space-x-4">
+      <li><a class="btn btn-outline btn-primary" href=""><i class="fa-solid fa-circle-question"></i> FAQ</a></li>
+      <li><a class="btn btn-outline btn-primary" href=""><i class="fa-solid fa-book-open"></i> Learn</a></li>
+      <li><a class="btn btn-outline btn-primary" href=""><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+    </ul>
+    </div>
+    </div>
+    </header>
+
+
+    <!-- Hero section -->
+     <section class="flex flex-col-reverse md:flex-row justify-between items-center w-11/12 mx-auto">
+      <div class="space-y-4 text-center md:text-left">
+        <h1 class="font-bold text-5xl"><span class="text-[#00BCFF]">English</span> is Easy !!</h1>
+        <p class="max-w-[580px] mx-auto md:mx-0">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ</p>
+
+      <form action="">
+          <input type="text" class="input" placeholder="Enter your name" />
+          <br><br>
+          <input type="password" class="input" placeholder="Password" />
+      </form>
+      <button class="btn btn-primary hover:bg-sky-500 hover:text-black">Get Started</button>
+      </div>
+        <img class="w-full max-w-[720px]" src="assets/hero-student.png" alt="">
+     </section>
+
+
+     <!-- Main section -->
+     <main>
+      <section class="mt-28">
+        <h1 class="font-bold text-5xl text-center pb-5"><span class="text-[#00BCFF]">Let's</span> Learn Vocabularies</h1>
+
+
+        <!-- Button section -->
+        <div id="level-container" class="flex justify-center gap-4 flex-wrap">
+
+        </div>
+      </section>
+
+
+      <!-- Words section -->
+       <section>
+        <div id="word-container" class=" grid grid-cols-3 gap-5 w-11/12 mx-auto bg-slate-200 p-10 m-12 space-x-5 space-y-5">
+          <div class="text-center col-span-full bg-white p-5">
+            <p class="text-xs">আপনি এখনো কোন Lesson Select করেন নি</p>
+            <h1 class="font-bold text-2xl">একটি Lesson Select করুন।</h1>
+          </div>
+        </div>
+
+
+
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+    <h3 class="text-lg font-bold">Hello!</h3>
+    <p class="py-4">Press ESC key or click the button below to close</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+       </section>
+     </main>
+
+
+    <script src="script/script.js"></script>
+</body>
+</html>
