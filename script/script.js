@@ -1,3 +1,31 @@
+
+
+const createElement = (arr) =>{
+    const htmlElements = arr .map ((el) => `<span class="btn">${el}</span>`);
+    return htmlElements.join (" ");
+};
+
+
+// speaker
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
+// loading
+const manageLoading = (status) =>{
+  if (status === true){
+    document.getElementById("loading").classList.remove ("hidden")
+    document.getElementById("word-container").classList.add ("hidden")
+  }
+  else{
+    document.getElementById("word-container").classList.remove ("hidden")
+    document.getElementById("loading").classList.add ("hidden")
+  }
+}
+
+
 const loadLessons = () => {
     fetch ("https://openapi.programming-hero.com/api/levels/all") //promise of response
     .then((res) => res.json())   //promise of json data
@@ -36,6 +64,7 @@ const removeActive = () =>{
 
 
 const loadLevelWord = (id) =>{
+  manageLoading(true);
     const url = `https://openapi.programming-hero.com/api/level/${id}`;
     fetch (url)
     .then ((res) => res.json())
@@ -49,6 +78,39 @@ const loadLevelWord = (id) =>{
 }
 
 
+
+const loadWordDetails = async(id) => {
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  const res = await fetch (url);
+  const details = await res.json ();
+  displayWordDetails(details.data);
+}
+
+
+const displayWordDetails = (word) => {
+  console.log(word);
+  const detailsContainer = document.getElementById ("details-container");
+  detailsContainer.innerHTML = `
+  
+                <div class="space-y-1">
+                <h2 class=" text-3xl font-bold">${word.word} (<i class="fa-solid fa-microphone-lines"></i>:${word.pronunciation})</h2>
+              </div>
+              <div class="space-y-1">
+                <h2 class="font-bold">Meaning</h2>
+                <p>${word.meaning}</p>
+              </div>
+              <div class="space-y-1">
+                <h2 class="font-bold">Example</h2>
+                <p>${word.sentence}.</p>
+              </div>
+              <div class="space-y-1">
+                <h2 class="font-bold">সমার্থক শব্দ গুলো</h2>
+                <div class="">${createElement(word.synonyms)}</div>
+              </div>
+  
+  `;
+  document.getElementById ("my_modal_5").showModal();
+}
 
 // card Function
 const displayLevelWords = (words) =>{
@@ -65,6 +127,7 @@ const displayLevelWords = (words) =>{
           </div>
         </div>
         `
+        manageLoading(false);
         return;
     }
 
@@ -82,13 +145,33 @@ const displayLevelWords = (words) =>{
               <h2 class="card-title">"${word.meaning ? word.meaning :  "অর্থ পাওয়া যায়নি"} / ${word.pronunciation ? word.pronunciation : "pronunciation পাওয়া যায়নি"}"</h2>
             </div>
             <div class="flex justify-between p-5">
-              <button onclick = "my_modal_5.showModal()" class="btn bg-slate-300 hover:bg-sky-500"><i class="fa-solid fa-circle-exclamation"></i></button>
-              <button class="btn bg-slate-300 hover:bg-sky-500"><i class="fa-solid fa-volume-high"></i></button>
+              <button onclick = "loadWordDetails(${word.id})" class="btn bg-slate-300 hover:bg-sky-500"><i class="fa-solid fa-circle-exclamation"></i></button>
+
+              <button onclick = "pronounceWord('${word.word}')" class="btn bg-slate-300 hover:bg-sky-500"><i class="fa-solid fa-volume-high"></i></button>
             </div>
           </div>
         `;
         // 2.2 append into container
         wordContainer.append(card)
     };
+    manageLoading (false)
 }
 loadLessons ();
+
+
+
+document.getElementById ("btn-search").addEventListener ("click", () =>{
+  removeActive();
+  const inputSearch = document.getElementById("input-search");
+  const searchValue = inputSearch.value.trim().toLowerCase();
+  console.log(searchValue);
+
+  fetch ("https://openapi.programming-hero.com/api/words/all")
+  .then((res) => res.json())
+  .then ((data) => {
+    const allWords = data.data;
+    console.log(allWords);
+    const filterWords = allWords.filter((word) => word.word.toLowerCase().includes(searchValue));
+    displayLevelWords(filterWords);
+  });
+});
